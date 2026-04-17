@@ -1,1 +1,54 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kdrama App</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial;
+    }
+    .player {
+      width: 100%;
+      height: 250px;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .episode {
+      padding: 15px;
+      background: #222;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Kdrama App</h2>
+
+<div class="player">
+  <iframe id="videoPlayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+</div>
+
+<div class="episode" onclick="playVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+  Episodio 1
+</div>
+
+<div class="episode" onclick="playVideo('https://www.youtube.com/embed/3JZ_D3ELwOQ')">
+  Episodio 2
+</div>
+
+<script>
+function playVideo(url) {
+  document.getElementById("videoPlayer").src = url;
+}
+</script>
+
+</body>
+</html>
