@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>K-Drama Game</title>
+  <title>KDrama Game</title>
   <style>
     body {
       margin: 0;
       background: skyblue;
       overflow: hidden;
-      font-family: Arial;
     }
 
     #player {
@@ -26,19 +25,16 @@
       position: absolute;
     }
 
-    #quiz {
+    #controls {
       position: fixed;
-      top: 20%;
-      left: 10%;
-      right: 10%;
-      background: white;
-      color: black;
-      padding: 20px;
-      display: none;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
     }
 
     button {
-      padding: 10px;
+      font-size: 20px;
+      padding: 15px;
       margin: 5px;
     }
   </style>
@@ -52,10 +48,10 @@
 <div class="platform" style="bottom:120px; left:200px;"></div>
 <div class="platform" style="bottom:200px; left:400px;"></div>
 
-<div id="quiz">
-  <h3>¿Quién es el protagonista de Goblin?</h3>
-  <button onclick="checkAnswer(true)">Gong Yoo</button>
-  <button onclick="checkAnswer(false)">Lee Min Ho</button>
+<div id="controls">
+  <button onclick="moveLeft()">⬅️</button>
+  <button onclick="jump()">⬆️</button>
+  <button onclick="moveRight()">➡️</button>
 </div>
 
 <script>
@@ -65,6 +61,37 @@ let velocity = 0;
 let gravity = 0.5;
 let jumping = false;
 
-document.addEventListener("keydown", function(e) {
-  if (e.key === "ArrowRight") {
-    player.style.left = (playe
+function moveRight() {
+  player.style.left = (player.offsetLeft + 20) + "px";
+}
+
+function moveLeft() {
+  player.style.left = (player.offsetLeft - 20) + "px";
+}
+
+function jump() {
+  if (!jumping) {
+    velocity = -10;
+    jumping = true;
+  }
+}
+
+function gameLoop() {
+  velocity += gravity;
+  y -= velocity;
+
+  if (y <= 50) {
+    y = 50;
+    jumping = false;
+  }
+
+  player.style.bottom = y + "px";
+
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+
+</body>
+</html>
